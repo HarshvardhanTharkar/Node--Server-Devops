@@ -1,0 +1,107 @@
+{
+  "_comment": "=================================================================",
+  "_comment2": "IAM Policy — nodejs-cicd-pipeline-policy",
+  "_comment3": "=================================================================",
+  "_comment4": "Attach this policy to the IAM user/role used by Jenkins.",
+  "_comment5": "Replace ACCOUNT_ID and REGION with actual values.",
+  "_comment6": "Principle: grant ONLY what the pipeline needs, nothing more.",
+  "_comment7": "=================================================================",
+
+  "Version": "2012-10-17",
+  "Statement": [
+
+    {
+      "_comment": "ECR — authenticate, push, pull, describe images",
+      "Sid": "ECRTokenAuth",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:GetAuthorizationToken"
+      ],
+      "Resource": "*",
+      "_why": "GetAuthorizationToken cannot be scoped to a specific repository. It generates a temporary Docker login token."
+    },
+
+    {
+      "Sid": "ECRRepositoryAccess",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload",
+        "ecr:PutImage",
+        "ecr:DescribeImages",
+        "ecr:DescribeRepositories",
+        "ecr:ListImages",
+        "ecr:GetLifecyclePolicy",
+        "ecr:GetRepositoryPolicy"
+      ],
+      "Resource": "arn:aws:ecr:REGION:ACCOUNT_ID:repository/nodejs-cicd-app",
+      "_why": "Scoped to the specific ECR repository. Allows full image push/pull lifecycle."
+    },
+
+    {
+      "_comment": "EC2 — describe instances for health checks and metadata",
+      "Sid": "EC2ReadOnly",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeTags",
+        "ec2:DescribeInstanceStatus",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs"
+      ],
+      "Resource": "*",
+      "_why": "Describe actions cannot be scoped to specific resources in AWS (they return lists). Read-only — cannot modify infrastructure."
+    },
+
+    {
+      "_comment": "CloudWatch Logs — publish pipeline and application logs",
+      "Sid": "CloudWatchLogsWrite",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogGroups",
+        "logs:DescribeLogStreams"
+      ],
+      "Resource": "arn:aws:logs:REGION:ACCOUNT_ID:log-group:/aws/ec2/nodejs-cicd*",
+      "_why": "Scoped to the project log group prefix. Allows writing logs from Jenkins and the application."
+    },
+
+    {
+      "_comment": "SSM Parameter Store — read secrets (no access keys in code)",
+      "Sid": "SSMGetParameters",
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameter",
+        "ssm:GetParameters",
+        "ssm:GetParametersByPath"
+      ],
+      "Resource": "arn:aws:ssm:REGION:ACCOUNT_ID:parameter/nodejs-cicd/*",
+      "_why": "Scoped to the project namespace. Jenkins and the app read DB passwords, API keys from SSM instead of environment variables."
+    },
+
+    {
+      "_comment": "KMS — decrypt SSM SecureString parameters",
+      "Sid": "KMSDecrypt",
+      "Effect": "Allow",
+      "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey"
+      ],
+      "Resource": "arn:aws:kms:REGION:ACCOUNT_ID:key/*",
+      "Condition": {
+        "StringEquals": {
+          "kms:ViaService": "ssm.REGION.amazonaws.com"
+        }
+      },
+      "_why": "Required to decrypt SSM SecureString parameters. Condition restricts KMS use to SSM service only."
+    }
+  ]
+}

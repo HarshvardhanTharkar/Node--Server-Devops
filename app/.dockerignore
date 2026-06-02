@@ -1,0 +1,58 @@
+# ─── .dockerignore ───────────────────────────────────────────────────────────
+#
+# Files listed here are EXCLUDED from the Docker build context.
+# Smaller build context = faster `docker build` and no secrets leaking into
+# the image layer history.
+#
+# Rule of thumb: if it's not needed to RUN the app, exclude it.
+
+# Node modules — always re-installed inside the image via npm ci
+node_modules/
+
+# Test artefacts — never ship tests to production
+coverage/
+tests/
+*.test.js
+*.spec.js
+
+# Environment files — NEVER bake secrets into an image
+.env
+.env.*
+!.env.example          # Allow the example (no real secrets)
+
+# Version control metadata
+.git/
+.gitignore
+
+# Editor / OS artefacts
+.DS_Store
+*.swp
+*.swo
+Thumbs.db
+.idea/
+.vscode/
+
+# CI / CD configs — not needed at runtime
+Jenkinsfile
+.sonarqube/
+trivy-report.json
+
+# Documentation
+README.md
+docs/
+
+# Terraform (in case run from project root)
+terraform/
+
+# Docker config itself
+Dockerfile
+.dockerignore
+
+# Logs
+*.log
+logs/
+
+# npm debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

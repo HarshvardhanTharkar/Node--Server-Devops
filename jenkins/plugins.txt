@@ -1,0 +1,80 @@
+# =============================================================================
+# jenkins/plugins.txt — Required Jenkins Plugins
+# =============================================================================
+#
+# Install all plugins via: Jenkins UI → Manage Jenkins → Plugin Manager
+# Or use the Jenkins CLI:
+#   java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin <plugin-id>
+#
+# Plugin explanations:
+#
+# PIPELINE PLUGINS
+# ─────────────────
+# workflow-aggregator        Core Declarative Pipeline support
+# pipeline-stage-view        Visual pipeline stages in Jenkins UI
+# blueocean                  Modern pipeline visualization UI
+# pipeline-utility-steps     readJSON, readFile, etc. utility steps
+#
+# SOURCE CONTROL
+# ──────────────
+# git                        Git SCM integration
+# github                     GitHub-specific features (PR status, etc.)
+# github-branch-source       Multibranch Pipeline support for GitHub
+#
+# DOCKER
+# ──────
+# docker-workflow            docker.build(), docker.withRegistry() steps
+# docker-plugin              Docker agents (build on Docker containers)
+#
+# AWS
+# ───
+# aws-credentials            Store AWS access key + secret securely
+# pipeline-aws               withAWS() step, aws CLI integration
+#
+# SONARQUBE
+# ─────────
+# sonar                      withSonarQubeEnv() step, Quality Gate
+#
+# CREDENTIALS
+# ───────────
+# credentials                Core credentials store
+# credentials-binding        withCredentials() step
+# ssh-agent                  sshagent() step for SSH key injection
+#
+# REPORTING
+# ─────────
+# htmlpublisher              publishHTML() step for coverage reports
+# junit                      JUnit test report parsing
+# ansicolor                  ANSI color codes in console output
+#
+# NOTIFICATIONS (optional)
+# ────────────────────────
+# slack                      Slack notifications
+# email-ext                  Extended email notifications
+
+# Paste into Jenkins Plugin Manager "Available Plugins" search, or use CLI:
+
+workflow-aggregator
+pipeline-stage-view
+blueocean
+pipeline-utility-steps
+git
+github
+github-branch-source
+docker-workflow
+docker-plugin
+aws-credentials
+pipeline-aws
+sonar
+credentials
+credentials-binding
+ssh-agent
+htmlpublisher
+junit
+ansicolor
+timestamper
+build-timeout
+discard-old-build
+antisamy-markup-formatter
+matrix-auth
+role-strategy

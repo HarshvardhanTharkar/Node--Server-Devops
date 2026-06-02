@@ -1,0 +1,52 @@
+# ─── Node.js ─────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+*.log
+
+# Test artefacts
+coverage/
+.nyc_output/
+
+# ─── Environment Files ────────────────────────────────────────────────────────
+# NEVER commit real .env files — they contain secrets
+.env
+.env.local
+.env.production
+.env.*.local
+# Allow the example (no real values)
+!.env.example
+
+# ─── Terraform ────────────────────────────────────────────────────────────────
+# State files contain sensitive data (IPs, ARNs, etc.)
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/*.tfstate.backup
+# terraform.tfvars may contain secrets — add to .gitignore if it does
+# terraform/terraform.tfvars
+
+# Lock file is fine to commit (reproducible provider versions)
+# !terraform/.terraform.lock.hcl
+
+# ─── OS / Editor ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
+
+# ─── Security Scan Reports (optional: archive in CI instead) ──────────────────
+trivy-report.txt
+trivy-report.json
+sonar-report/
+
+# ─── SSH Keys ─────────────────────────────────────────────────────────────────
+*.pem
+*.key
+*.pub
+id_rsa*
