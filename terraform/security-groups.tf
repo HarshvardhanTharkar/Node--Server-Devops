@@ -25,7 +25,7 @@ resource "aws_security_group" "jenkins_ec2" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]   # TODO: restrict to your IP in production
+    cidr_blocks = ["0.0.0.0/0"] # TODO: restrict to your IP in production
   }
 
   # HTTP — Node.js application traffic from the internet or ALB.
@@ -52,7 +52,7 @@ resource "aws_security_group" "jenkins_ec2" {
     from_port   = var.jenkins_port
     to_port     = var.jenkins_port
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]   # TODO: restrict to your IP in production
+    cidr_blocks = ["0.0.0.0/0"] # TODO: restrict to your IP in production
   }
 
   # SonarQube UI — Code quality dashboard.
@@ -61,7 +61,7 @@ resource "aws_security_group" "jenkins_ec2" {
     from_port   = var.sonarqube_port
     to_port     = var.sonarqube_port
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]   # TODO: restrict to your IP in production
+    cidr_blocks = ["0.0.0.0/0"] # TODO: restrict to your IP in production
   }
 
   # ── Outbound Rules ────────────────────────────────────────────────────────
@@ -71,7 +71,7 @@ resource "aws_security_group" "jenkins_ec2" {
     description = "Allow all outbound traffic"
     from_port   = 0
     to_port     = 0
-    protocol    = "-1"   # -1 means all protocols
+    protocol    = "-1" # -1 means all protocols
     cidr_blocks = ["0.0.0.0/0"]
   }
 

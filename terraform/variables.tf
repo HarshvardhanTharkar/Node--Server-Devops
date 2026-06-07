@@ -58,7 +58,7 @@ variable "availability_zone" {
 variable "instance_type" {
   description = "EC2 instance type for the Jenkins/app server"
   type        = string
-  default     = "t3.medium"   # 2 vCPU, 4 GB — enough for Jenkins + Docker
+  default     = "t3.medium" # 2 vCPU, 4 GB — enough for Jenkins + Docker
 }
 
 variable "key_pair_name" {
@@ -70,7 +70,7 @@ variable "key_pair_name" {
 variable "ami_id" {
   description = "AMI ID for the EC2 instance (Amazon Linux 2023 recommended)"
   type        = string
-  default     = "ami-0c101f26f147fa7fd"   # Amazon Linux 2023, us-east-1 (update per region)
+  default     = "ami-0c101f26f147fa7fd" # Amazon Linux 2023, us-east-1 (update per region)
 }
 
 # ─── ECR ──────────────────────────────────────────────────────────────────────

@@ -1,8 +1,7 @@
 /**
  * app.js — Express Application Configuration
  *
- * Separating the app setup from server.js lets us import the
- * configured app in tests without actually binding to a port.
+ * Separating the app setup from server.js 
  */
 
 'use strict';

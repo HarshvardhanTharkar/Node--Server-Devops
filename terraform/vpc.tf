@@ -15,8 +15,8 @@
 # ─── VPC ─────────────────────────────────────────────────────────────────────
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
-  enable_dns_support   = true   # Required for EC2 hostnames to resolve
-  enable_dns_hostnames = true   # Assigns public DNS names to EC2 instances
+  enable_dns_support   = true # Required for EC2 hostnames to resolve
+  enable_dns_hostnames = true # Assigns public DNS names to EC2 instances
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-vpc"

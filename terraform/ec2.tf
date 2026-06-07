@@ -49,14 +49,14 @@ resource "aws_iam_role_policy" "ec2_policy" {
         Sid    = "ECRPermissions"
         Effect = "Allow"
         Action = [
-          "ecr:GetAuthorizationToken",           # docker login to ECR
-          "ecr:BatchCheckLayerAvailability",     # check if layers exist (optimization)
-          "ecr:GetDownloadUrlForLayer",          # pull image layers
-          "ecr:BatchGetImage",                   # pull full images
-          "ecr:InitiateLayerUpload",             # push image layers
+          "ecr:GetAuthorizationToken",       # docker login to ECR
+          "ecr:BatchCheckLayerAvailability", # check if layers exist (optimization)
+          "ecr:GetDownloadUrlForLayer",      # pull image layers
+          "ecr:BatchGetImage",               # pull full images
+          "ecr:InitiateLayerUpload",         # push image layers
           "ecr:UploadLayerPart",
           "ecr:CompleteLayerUpload",
-          "ecr:PutImage",                        # push image manifest
+          "ecr:PutImage", # push image manifest
           "ecr:DescribeRepositories",
           "ecr:ListImages",
           "ecr:DescribeImages",
@@ -132,10 +132,10 @@ resource "aws_instance" "jenkins" {
 
   # 30 GB root volume — Jenkins workspace + Docker images can be large
   root_block_device {
-    volume_type           = "gp3"   # gp3 is cheaper and faster than gp2
+    volume_type           = "gp3" # gp3 is cheaper and faster than gp2
     volume_size           = 30
-    delete_on_termination = true    # Delete the disk when instance is terminated
-    encrypted             = true    # Encrypt at rest (compliance requirement)
+    delete_on_termination = true # Delete the disk when instance is terminated
+    encrypted             = true # Encrypt at rest (compliance requirement)
 
     tags = merge(local.common_tags, {
       Name = "${local.name_prefix}-root-volume"
