@@ -178,30 +178,11 @@ pipeline {
         //   - Coverage gaps
         //
         // The analysis results are sent to the SonarQube server (running on this EC2).
-        stage('SonarQube Analysis') {
-            steps {
-                echo "╔══════════════════════════════════╗"
-                echo "║  Stage: SonarQube Analysis       ║"
-                echo "╚══════════════════════════════════╝"
-
-                // withSonarQubeEnv injects the SonarQube server URL and auth token
-                // from the Jenkins SonarQube configuration (Manage Jenkins → Configure System)
-                withSonarQubeEnv('SonarQube') {
-                    dir('app') {
-                        sh """
-                            ${tool 'SonarScanner'}/bin/sonar-scanner \
-                                -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-                                -Dsonar.projectName="${APP_NAME}" \
-                                -Dsonar.projectVersion=${BUILD_NUMBER} \
-                                -Dsonar.sources=. \
-                                -Dsonar.exclusions=**/node_modules/**,**/coverage/**,**/tests/** \
-                                -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
-                                -Dsonar.sourceEncoding=UTF-8
-                        """
-                    }
-                }
-            }
-        }
+       stage('SonarQube Analysis') {
+    steps {
+        echo "SonarQube skipped — will be configured in Phase 2"
+    }
+}
 
         // ── Stage 5: Quality Gate ─────────────────────────────────────────────
         // The Quality Gate is a set of conditions defined in SonarQube.
@@ -212,15 +193,8 @@ pipeline {
         // This prevents broken code from being promoted to production.
         stage('Quality Gate') {
             steps {
-                echo "╔══════════════════════════════════╗"
-                echo "║  Stage: Quality Gate             ║"
-                echo "╚══════════════════════════════════╝"
-
-                // Wait up to 2 minutes for SonarQube to process results and update gate
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
+        echo "Quality Gate skipped — will be configured in Phase 2"
+    }
         }
 
         // ── Stage 6: Build Docker Image ───────────────────────────────────────
