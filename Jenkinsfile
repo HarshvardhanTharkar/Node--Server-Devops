@@ -68,11 +68,11 @@ pipeline {
                 echo "╚══════════════════════════════════╝"
 
                 dir('app') {
-                    sh '''
-                        npm ci
-                        echo "Installed packages:"
-                        npm list --depth=0
-                    '''
+                   sh '''
+    NODE_ENV=development npm ci
+    echo "Installed packages:"
+    npm list --depth=0
+'''
                 }
             }
         }
@@ -84,7 +84,7 @@ pipeline {
                 echo "╚══════════════════════════════════╝"
 
                 dir('app') {
-                   sh './node_modules/.bin/jest --coverage --forceExit'
+                  sh 'NODE_ENV=test ./node_modules/.bin/jest --coverage --forceExit'
                 }
             }
             post {
