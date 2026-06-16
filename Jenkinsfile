@@ -84,7 +84,7 @@ pipeline {
                 echo "╚══════════════════════════════════╝"
 
                 dir('app') {
-                    sh 'npm test'
+                   sh './node_modules/.bin/jest --coverage --forceExit'
                 }
             }
             post {
