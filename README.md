@@ -264,56 +264,32 @@ Jenkins Pipeline (11 Stages)
 
 ## 📸 Screenshots
 
-> **Place your screenshots in this order in the `docs/screenshots/` folder:**
-
 ### 1. Jenkins Pipeline — Build #3 SUCCESS
-> `docs/screenshots/01-jenkins-pipeline-success.png`
-> 
-> *Caption: Jenkins Build #3 showing "PIPELINE SUCCEEDED - Build #3 - Commit: dbc600fc" with Finished: SUCCESS*
+![Jenkins Pipeline](docs/screenshots/01-jenkins-pipeline-success.png)
 
+### 2. Application — /health Endpoint
+![Health Endpoint](docs/screenshots/03-app-health-endpoint.png)
 
+### 3. Application — /version Endpoint
+![Version Endpoint](docs/screenshots/04-app-version-endpoint.png)
 
-### 3. Application — /health Endpoint
-> `docs/screenshots/03-app-health-endpoint.png`
->
-> *Caption: Live /health endpoint returning status: healthy, uptime: 449s, environment: production*
+### 4. Application — /api/status Endpoint
+![API Status Endpoint](docs/screenshots/05-app-api-status.png)
 
-### 4. Application — /version Endpoint
-> `docs/screenshots/04-app-version-endpoint.png`
->
-> *Caption: /version endpoint showing gitCommit, buildNumber: 3, buildDate from the pipeline*
+### 5. AWS ECR — Docker Image Pushed
+![ECR Image](docs/screenshots/06-ecr-image-pushed.png)
 
-### 5. Application — /api/status Endpoint
-> `docs/screenshots/05-app-api-status.png`
->
-> *Caption: /api/status showing status: operational, region: eu-north-1*
+### 6. AWS EC2 — Running Instance
+![EC2 Instance](docs/screenshots/07-ec2-instance-running.png)
 
-### 6. AWS ECR — Docker Image Pushed
-> `docs/screenshots/06-ecr-image-pushed.png`
->
-> *Caption: ECR repository showing image tags build-3-dbc600fc and latest*
+### 7. Terraform Apply — Infrastructure Created
+![Terraform Apply](docs/screenshots/08-terraform-apply-output.png)
 
-### 7. AWS EC2 — Running Instance
-> `docs/screenshots/07-ec2-instance-running.png`
->
-> *Caption: EC2 console showing t3.micro instance running in eu-north-1a*
+### 8. Trivy Security Scan Report
+![Trivy Scan](docs/screenshots/09-trivy-scan-report.png)
 
-### 8. Terraform Apply — Infrastructure Created
-> `docs/screenshots/08-terraform-apply-output.png`
->
-> *Caption: terraform apply output showing 15 resources created*
-
-### 9. Trivy Security Scan Report
-> `docs/screenshots/09-trivy-scan-report.png`
->
-> *Caption: Trivy scan results from Jenkins console showing CVE analysis*
-
-### 10. Docker Container Running on EC2
-> `docs/screenshots/10-docker-container-ec2.png`
->
-> *Caption: docker ps showing nodejs-app container Up with health: healthy*
-
----
+### 9. Docker Container Running on EC2
+![Docker Container](docs/screenshots/10-docker-container-ec2.png)
 
 ## ⚡ Quick Start
 
