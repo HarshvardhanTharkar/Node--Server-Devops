@@ -288,7 +288,7 @@ Jenkins Pipeline (11 Stages)
 ### 8. Trivy Security Scan Report
 ![Trivy Scan](docs/screenshots/09-trivy-scan-report.png)
 
-### 9. Docker Container Running on EC2
+### 9. Docker Container Running 
 ![Docker Container](docs/screenshots/10-docker-container-ec2.png)
 
 ## ⚡ Quick Start
